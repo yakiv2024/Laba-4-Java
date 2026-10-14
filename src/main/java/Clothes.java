@@ -1,4 +1,4 @@
-
+import java.util.Objects;
 public class Clothes {
     private String name;
     private String size;
@@ -33,4 +33,27 @@ public class Clothes {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public String toString() {
+        return "Clothes{name='" + name +
+                "', size='" + size +
+                "', price=" + price + "}";
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Clothes other = (Clothes) obj;
+
+        return Double.compare(price, other.price) == 0
+                && Objects.equals(name, other.name)
+                && Objects.equals(size, other.size);
+    }
 }
+
