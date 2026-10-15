@@ -1,13 +1,27 @@
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Введіть кількість речей: ");
-        int count = scanner.nextInt();
-        scanner.nextLine();
+        int count;
+
+        while (true) {
+            System.out.print("Введіть кількість речей: ");
+
+            if (scanner.hasNextInt()) {
+                count = scanner.nextInt();
+                scanner.nextLine();
+
+                if (count > 0) {
+                    break;
+                }
+            } else {
+                scanner.nextLine();
+            }
+
+            System.out.println("Помилка! Введіть додатне ціле число.");
+        }
 
         Clothes[] clothes = new Clothes[count];
 
@@ -20,9 +34,24 @@ public class Main {
             System.out.print("Розмір: ");
             String size = scanner.nextLine();
 
-            System.out.print("Ціна: ");
-            double price = scanner.nextDouble();
-            scanner.nextLine();
+            double price;
+
+            while (true) {
+                System.out.print("Ціна: ");
+
+                if (scanner.hasNextDouble()) {
+                    price = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    if (Double.isFinite(price) && price >= 0) {
+                        break;
+                    }
+                } else {
+                    scanner.nextLine();
+                }
+
+                System.out.println("Помилка! Введіть коректну ціну.");
+            }
 
             clothes[i] = new Clothes(name, size, price);
         }
@@ -36,3 +65,4 @@ public class Main {
         scanner.close();
     }
 }
+
