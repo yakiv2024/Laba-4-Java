@@ -53,7 +53,11 @@ public class Main {
                 System.out.println("Помилка! Введіть коректну ціну.");
             }
 
-            clothes[i] = new Clothes(name, size, price);
+            System.out.print("Кількість: ");
+            int quantity = scanner.nextInt();
+            scanner.nextLine();
+
+            clothes[i] = new Clothes(name, size, price, quantity);
         }
 
         System.out.println("\nСписок одягу:");
@@ -65,4 +69,5 @@ public class Main {
         scanner.close();
     }
 }
+
 
