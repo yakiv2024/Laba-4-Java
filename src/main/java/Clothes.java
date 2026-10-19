@@ -1,3 +1,4 @@
+
 import java.util.Objects;
 
 public class Clothes {
@@ -7,10 +8,10 @@ public class Clothes {
     private int quantity;
 
     public Clothes(String name, String size, double price, int quantity) {
-        this.name = name;
-        this.size = size;
-        this.price = price;
-        this.quantity = quantity;
+        setName(name);
+        setSize(size);
+        setPrice(price);
+        setQuantity(quantity);
     }
 
     public String getName() {
@@ -18,6 +19,9 @@ public class Clothes {
     }
 
     public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Назва не може бути порожньою");
+        }
         this.name = name;
     }
 
@@ -26,6 +30,9 @@ public class Clothes {
     }
 
     public void setSize(String size) {
+        if (size == null || size.trim().isEmpty()) {
+            throw new IllegalArgumentException("Розмір не може бути порожнім");
+        }
         this.size = size;
     }
 
@@ -34,6 +41,9 @@ public class Clothes {
     }
 
     public void setPrice(double price) {
+        if (!Double.isFinite(price) || price < 0) {
+            throw new IllegalArgumentException("Ціна повинна бути невід'ємною");
+        }
         this.price = price;
     }
 
@@ -42,6 +52,9 @@ public class Clothes {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Кількість повинна бути більшою за нуль");
+        }
         this.quantity = quantity;
     }
 
@@ -69,5 +82,6 @@ public class Clothes {
                 && Objects.equals(size, other.size);
     }
 }
+
 
 
