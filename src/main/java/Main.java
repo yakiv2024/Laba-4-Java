@@ -1,72 +1,70 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        int count;
+        ArrayList<Clothes> clothes = new ArrayList<>();
 
         while (true) {
-            System.out.print("Введіть кількість речей: ");
+            System.out.println("\n МЕНЮ ПРОГРАМИ");
+            System.out.println("1. Створити новий об'єкт");
+            System.out.println("2. Вивести інформацію про всі об'єкти");
+            System.out.println("3. Завершити роботу");
+            System.out.print("Виберіть дію: ");
 
-            if (scanner.hasNextInt()) {
-                count = scanner.nextInt();
-                scanner.nextLine();
+            String choice = scanner.nextLine().trim();
 
-                if (count > 0) {
-                    break;
-                }
-            } else {
-                scanner.nextLine();
-            }
+            switch (choice) {
+                case "1":
+                    try {
+                        System.out.print("Назва: ");
+                        String name = scanner.nextLine();
 
-            System.out.println("Помилка! Введіть додатне ціле число.");
-        }
+                        System.out.print("Розмір: ");
+                        String size = scanner.nextLine();
 
-        Clothes[] clothes = new Clothes[count];
+                        System.out.print("Ціна: ");
+                        double price = Double.parseDouble(
+                                scanner.nextLine().trim().replace(',', '.'));
 
-        for (int i = 0; i < count; i++) {
-            System.out.println("\nРіч №" + (i + 1));
+                        System.out.print("Кількість: ");
+                        int quantity = Integer.parseInt(
+                                scanner.nextLine().trim());
 
-            System.out.print("Назва: ");
-            String name = scanner.nextLine();
+                        Clothes item = new Clothes(name, size, price, quantity);
+                        clothes.add(item);
 
-            System.out.print("Розмір: ");
-            String size = scanner.nextLine();
+                        System.out.println("Об'єкт успішно створено!");
 
-            double price;
-
-            while (true) {
-                System.out.print("Ціна: ");
-
-                if (scanner.hasNextDouble()) {
-                    price = scanner.nextDouble();
-                    scanner.nextLine();
-
-                    if (Double.isFinite(price) && price >= 0) {
-                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Помилка! Введіть правильне число.");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Помилка! " + e.getMessage());
                     }
-                } else {
-                    scanner.nextLine();
-                }
+                    break;
 
-                System.out.println("Помилка! Введіть коректну ціну.");
+                case "2":
+                    if (clothes.isEmpty()) {
+                        System.out.println("Список одягу порожній.");
+                    } else {
+                        System.out.println("\nСписок одягу:");
+
+                        for (Clothes item : clothes) {
+                            System.out.println(item.toString());
+                        }
+                    }
+                    break;
+
+                case "3":
+                    System.out.println("Роботу завершено.");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Помилка. Виберіть пункт від 1 до 3");
             }
-
-            System.out.print("Кількість: ");
-            int quantity = scanner.nextInt();
-            scanner.nextLine();
-
-            clothes[i] = new Clothes(name, size, price, quantity);
         }
-
-        System.out.println("\nСписок одягу:");
-
-        for (Clothes item : clothes) {
-            System.out.println(item.toString());
-        }
-
-        scanner.close();
     }
 }
 
