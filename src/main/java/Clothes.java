@@ -1,16 +1,13 @@
 import java.util.Objects;
-
 public class Clothes {
     private String name;
     private String size;
     private double price;
-    private int quantity;
 
-    public Clothes(String name, String size, double price, int quantity) {
+    public Clothes(String name, String size, double price) {
         this.name = name;
         this.size = size;
         this.price = price;
-        this.quantity = quantity;
     }
 
     public String getName() {
@@ -37,19 +34,10 @@ public class Clothes {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String toString() {
         return "Clothes{name='" + name +
                 "', size='" + size +
-                "', price=" + price +
-                ", quantity=" + quantity + "}";
+                "', price=" + price + "}";
     }
 
     public boolean equals(Object obj) {
@@ -64,10 +52,8 @@ public class Clothes {
         Clothes other = (Clothes) obj;
 
         return Double.compare(price, other.price) == 0
-                && quantity == other.quantity
                 && Objects.equals(name, other.name)
                 && Objects.equals(size, other.size);
     }
 }
-
 
