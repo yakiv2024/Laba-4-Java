@@ -6,16 +6,23 @@ public class Clothes {
     private double price;
     private int quantity;
 
+    private static int objectCount = 0;
+
     public Clothes(String name, String size, double price, int quantity) {
         setName(name);
         setSize(size);
         setPrice(price);
         setQuantity(quantity);
+        objectCount++;
     }
 
     public Clothes(Clothes other) {
         this(other.getName(), other.getSize(),
              other.getPrice(), other.getQuantity());
+    }
+
+    public static int getObjectCount() {
+        return objectCount;
     }
 
     public String getName() {
@@ -86,6 +93,7 @@ public class Clothes {
                 && Objects.equals(size, other.size);
     }
 }
+
 
 
 

@@ -42,6 +42,7 @@ public class Main {
                         System.out.println("Original: " + item);
                         System.out.println("Copy: " + copy);
                         System.out.println("Same object: " + (item == copy));
+                        System.out.println("Created objects: " + Clothes.getObjectCount());
 
                     } catch (NumberFormatException e) {
                         System.out.println("Помилка! Введіть правильне число.");
@@ -73,6 +74,7 @@ public class Main {
         }
     }
 }
+
 
 
 
