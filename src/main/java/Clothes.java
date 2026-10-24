@@ -1,4 +1,3 @@
-
 import java.util.Objects;
 
 public class Clothes {
@@ -12,6 +11,11 @@ public class Clothes {
         setSize(size);
         setPrice(price);
         setQuantity(quantity);
+    }
+
+    public Clothes(Clothes other) {
+        this(other.getName(), other.getSize(),
+             other.getPrice(), other.getQuantity());
     }
 
     public String getName() {
@@ -82,6 +86,7 @@ public class Clothes {
                 && Objects.equals(size, other.size);
     }
 }
+
 
 
 

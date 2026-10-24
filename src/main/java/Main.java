@@ -37,6 +37,12 @@ public class Main {
 
                         System.out.println("Об'єкт успішно створено!");
 
+                        Clothes copy = new Clothes(item);
+
+                        System.out.println("Original: " + item);
+                        System.out.println("Copy: " + copy);
+                        System.out.println("Same object: " + (item == copy));
+
                     } catch (NumberFormatException e) {
                         System.out.println("Помилка! Введіть правильне число.");
                     } catch (IllegalArgumentException e) {
@@ -67,5 +73,6 @@ public class Main {
         }
     }
 }
+
 
 
