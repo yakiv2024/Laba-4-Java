@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Clothes> clothes = new ArrayList<>();
+        Wardrobe wardrobe = new Wardrobe();
 
         while (true) {
             System.out.println("\n МЕНЮ ПРОГРАМИ");
@@ -64,8 +63,8 @@ public class Main {
 
                         Clothes item = new Clothes(
                                 name, size, price, quantity, category);
-                        clothes.add(item);
 
+                        wardrobe.addClothes(item);
                         System.out.println("Об'єкт успішно створено!");
 
                         Clothes copy = new Clothes(item);
@@ -75,6 +74,8 @@ public class Main {
                         System.out.println("Same object: " + (item == copy));
                         System.out.println("Created objects: "
                                 + Clothes.getObjectCount());
+                        System.out.println("Items in wardrobe: "
+                                + wardrobe.getSize());
 
                     } catch (NumberFormatException e) {
                         System.out.println("Помилка! Введіть правильне число.");
@@ -84,15 +85,7 @@ public class Main {
                     break;
 
                 case "2":
-                    if (clothes.isEmpty()) {
-                        System.out.println("Список одягу порожній.");
-                    } else {
-                        System.out.println("\nСписок одягу:");
-
-                        for (Clothes item : clothes) {
-                            System.out.println(item.toString());
-                        }
-                    }
+                    wardrobe.printClothes();
                     break;
 
                 case "3":
@@ -106,6 +99,7 @@ public class Main {
         }
     }
 }
+
 
 
 
