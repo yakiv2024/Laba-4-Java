@@ -5,20 +5,27 @@ public class Clothes {
     private String size;
     private double price;
     private int quantity;
+    private ClothingCategory category;
 
     private static int objectCount = 0;
 
-    public Clothes(String name, String size, double price, int quantity) {
+    public Clothes(String name, String size, double price,
+                   int quantity, ClothingCategory category) {
         setName(name);
         setSize(size);
         setPrice(price);
         setQuantity(quantity);
+        setCategory(category);
         objectCount++;
     }
 
+    public Clothes(String name, String size, double price, int quantity) {
+        this(name, size, price, quantity, ClothingCategory.TSHIRT);
+    }
+
     public Clothes(Clothes other) {
-        this(other.getName(), other.getSize(),
-             other.getPrice(), other.getQuantity());
+        this(other.getName(), other.getSize(), other.getPrice(),
+             other.getQuantity(), other.getCategory());
     }
 
     public static int getObjectCount() {
@@ -69,11 +76,23 @@ public class Clothes {
         this.quantity = quantity;
     }
 
+    public ClothingCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ClothingCategory category) {
+        if (category == null) {
+            throw new IllegalArgumentException("Категорія не може бути порожньою");
+        }
+        this.category = category;
+    }
+
     public String toString() {
         return "Clothes{name='" + name +
                 "', size='" + size +
                 "', price=" + price +
-                ", quantity=" + quantity + "}";
+                ", quantity=" + quantity +
+                ", category=" + category + "}";
     }
 
     public boolean equals(Object obj) {
@@ -90,9 +109,11 @@ public class Clothes {
         return Double.compare(price, other.price) == 0
                 && quantity == other.quantity
                 && Objects.equals(name, other.name)
-                && Objects.equals(size, other.size);
+                && Objects.equals(size, other.size)
+                && category == other.category;
     }
 }
+
 
 
 

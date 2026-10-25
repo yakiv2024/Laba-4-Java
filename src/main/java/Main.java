@@ -32,7 +32,38 @@ public class Main {
                         int quantity = Integer.parseInt(
                                 scanner.nextLine().trim());
 
-                        Clothes item = new Clothes(name, size, price, quantity);
+                        System.out.println("Категорії:");
+                        System.out.println("1. TSHIRT");
+                        System.out.println("2. JACKET");
+                        System.out.println("3. PANTS");
+                        System.out.println("4. SHOES");
+                        System.out.print("Виберіть категорію: ");
+
+                        int categoryNumber = Integer.parseInt(
+                                scanner.nextLine().trim());
+
+                        ClothingCategory category;
+
+                        switch (categoryNumber) {
+                            case 1:
+                                category = ClothingCategory.TSHIRT;
+                                break;
+                            case 2:
+                                category = ClothingCategory.JACKET;
+                                break;
+                            case 3:
+                                category = ClothingCategory.PANTS;
+                                break;
+                            case 4:
+                                category = ClothingCategory.SHOES;
+                                break;
+                            default:
+                                throw new IllegalArgumentException(
+                                        "Неправильна категорія");
+                        }
+
+                        Clothes item = new Clothes(
+                                name, size, price, quantity, category);
                         clothes.add(item);
 
                         System.out.println("Об'єкт успішно створено!");
@@ -42,7 +73,8 @@ public class Main {
                         System.out.println("Original: " + item);
                         System.out.println("Copy: " + copy);
                         System.out.println("Same object: " + (item == copy));
-                        System.out.println("Created objects: " + Clothes.getObjectCount());
+                        System.out.println("Created objects: "
+                                + Clothes.getObjectCount());
 
                     } catch (NumberFormatException e) {
                         System.out.println("Помилка! Введіть правильне число.");
@@ -74,6 +106,7 @@ public class Main {
         }
     }
 }
+
 
 
 
