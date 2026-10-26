@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 /**
- * Клас для опису одягу.
+ * Клас для опису одягу
  * Містить назву, розмір, ціну, кількість та категорію
  */
 public class Clothes {
@@ -10,8 +10,6 @@ public class Clothes {
     private double price;
     private int quantity;
     private ClothingCategory category;
-
-    private static int objectCount = 0;
 
     /**
      * Створює новий об'єкт одягу
@@ -29,11 +27,10 @@ public class Clothes {
         setPrice(price);
         setQuantity(quantity);
         setCategory(category);
-        objectCount++;
     }
 
     /**
-     * Створює одяг із категорією TSHIRT за замовчуванням.
+     * Створює одяг із категорією TSHIRT за замовчуванням
      *
      * @param name назва одягу
      * @param size розмір одягу
@@ -52,15 +49,6 @@ public class Clothes {
     public Clothes(Clothes other) {
         this(other.getName(), other.getSize(), other.getPrice(),
              other.getQuantity(), other.getCategory());
-    }
-
-    /**
-     * Повертає загальну кількість створених об'єктів
-     *
-     * @return кількість створених об'єктів
-     */
-    public static int getObjectCount() {
-        return objectCount;
     }
 
     /**
@@ -130,7 +118,7 @@ public class Clothes {
     }
 
     /**
-     * Повертає кількість одиниць одягу.
+     * Повертає кількість одиниць одягу
      *
      * @return кількість одягу
      */
@@ -189,7 +177,7 @@ public class Clothes {
     /**
      * Порівнює два об'єкти одягу за значеннями полів
      *
-     * @param obj об'єкт для порівняння
+     * @pram obj об'єкт для порівняння
      * @return true, якщо об'єкти мають однакові значення
      */
     public boolean equals(Object obj) {
@@ -210,9 +198,3 @@ public class Clothes {
                 && category == other.category;
     }
 }
-
-
-
-
-
-

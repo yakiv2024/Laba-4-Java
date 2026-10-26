@@ -1,10 +1,15 @@
 import java.util.Scanner;
+
 /**
- * Головний клас програми для роботи з одягом.
+ * Головний клас програми для роботи з одягом
  * Демонструє створення об'єктів, копіювання,
- * статичний лічильник, enum та агрегацію.
+ * enum та агрегацію
  */
 public class Main {
+
+    /**
+     * Точка входу в програму
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Wardrobe wardrobe = new Wardrobe();
@@ -76,8 +81,6 @@ public class Main {
                         System.out.println("Original: " + item);
                         System.out.println("Copy: " + copy);
                         System.out.println("Same object: " + (item == copy));
-                        System.out.println("Created objects: "
-                                + Clothes.getObjectCount());
                         System.out.println("Items in wardrobe: "
                                 + wardrobe.getSize());
 
@@ -103,9 +106,3 @@ public class Main {
         }
     }
 }
-
-
-
-
-
-
