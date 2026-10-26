@@ -1,5 +1,9 @@
 import java.util.Scanner;
-
+/**
+ * Головний клас програми для роботи з одягом.
+ * Демонструє створення об'єктів, копіювання,
+ * статичний лічильник, enum та агрегацію.
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
