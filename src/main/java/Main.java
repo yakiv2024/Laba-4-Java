@@ -1,18 +1,21 @@
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Головний клас програми для роботи з одягом
- * Демонструє створення об'єктів, копіювання,
- * enum та агрегацію
+ * Демонструє створення об'єктів, копіювання та enum
  */
 public class Main {
 
     /**
      * Точка входу в програму
+     *
+     * @param args аргументи командного рядка
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Wardrobe wardrobe = new Wardrobe();
+        ArrayList<Clothes> clothes = new ArrayList<>();
 
         while (true) {
             System.out.println("\n МЕНЮ ПРОГРАМИ");
@@ -73,7 +76,7 @@ public class Main {
                         Clothes item = new Clothes(
                                 name, size, price, quantity, category);
 
-                        wardrobe.addClothes(item);
+                        clothes.add(item);
                         System.out.println("Об'єкт успішно створено!");
 
                         Clothes copy = new Clothes(item);
@@ -81,8 +84,6 @@ public class Main {
                         System.out.println("Original: " + item);
                         System.out.println("Copy: " + copy);
                         System.out.println("Same object: " + (item == copy));
-                        System.out.println("Items in wardrobe: "
-                                + wardrobe.getSize());
 
                     } catch (NumberFormatException e) {
                         System.out.println("Помилка! Введіть правильне число.");
@@ -92,7 +93,15 @@ public class Main {
                     break;
 
                 case "2":
-                    wardrobe.printClothes();
+                    if (clothes.isEmpty()) {
+                        System.out.println("Список одягу порожній.");
+                    } else {
+                        System.out.println("\nСписок одягу:");
+
+                        for (Clothes item : clothes) {
+                            System.out.println(item.toString());
+                        }
+                    }
                     break;
 
                 case "3":
@@ -106,3 +115,5 @@ public class Main {
         }
     }
 }
+
+
