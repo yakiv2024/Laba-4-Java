@@ -1,13 +1,18 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
 /**
- * Головний клас програми для роботи з одягом.
- * Демонструє створення об'єктів, копіювання,
- * статичний лічильник, enum та агрегацію.
+ * Головний клас програми для роботи з одягом
+ * Демонструє наслідування та поліморфізм
  */
 public class Main {
+
+    /**
+     * Точка входу в програму
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Wardrobe wardrobe = new Wardrobe();
+        ArrayList<Clothes> clothes = new ArrayList<>();
 
         while (true) {
             System.out.println("\n МЕНЮ ПРОГРАМИ");
@@ -21,6 +26,20 @@ public class Main {
             switch (choice) {
                 case "1":
                     try {
+                        System.out.println("Тип одягу:");
+                        System.out.println("1. Звичайний одяг");
+                        System.out.println("2. Штани");
+                        System.out.println("3. Сорочка");
+                        System.out.print("Виберіть тип: ");
+
+                        int type = Integer.parseInt(
+                                scanner.nextLine().trim());
+
+                        if (type < 1 || type > 3) {
+                            throw new IllegalArgumentException(
+                                    "Неправильний тип одягу");
+                        }
+
                         System.out.print("Назва: ");
                         String name = scanner.nextLine();
 
@@ -35,65 +54,84 @@ public class Main {
                         int quantity = Integer.parseInt(
                                 scanner.nextLine().trim());
 
-                        System.out.println("Категорії:");
-                        System.out.println("1. TSHIRT");
-                        System.out.println("2. JACKET");
-                        System.out.println("3. PANTS");
-                        System.out.println("4. SHOES");
-                        System.out.print("Виберіть категорію: ");
+                        Clothes item;
 
-                        int categoryNumber = Integer.parseInt(
-                                scanner.nextLine().trim());
+                        if (type == 1) {
+                            System.out.println("Категорії:");
+                            System.out.println("1. TSHIRT");
+                            System.out.println("2. JACKET");
+                            System.out.println("3. PANTS");
+                            System.out.println("4. SHOES");
+                            System.out.print("Виберіть категорію: ");
 
-                        ClothingCategory category;
+                            int categoryNumber = Integer.parseInt(
+                                    scanner.nextLine().trim());
 
-                        switch (categoryNumber) {
-                            case 1:
-                                category = ClothingCategory.TSHIRT;
-                                break;
-                            case 2:
-                                category = ClothingCategory.JACKET;
-                                break;
-                            case 3:
-                                category = ClothingCategory.PANTS;
-                                break;
-                            case 4:
-                                category = ClothingCategory.SHOES;
-                                break;
-                            default:
-                                throw new IllegalArgumentException(
-                                        "Неправильна категорія");
+                            ClothingCategory category;
+
+                            switch (categoryNumber) {
+                                case 1:
+                                    category = ClothingCategory.TSHIRT;
+                                    break;
+                                case 2:
+                                    category = ClothingCategory.JACKET;
+                                    break;
+                                case 3:
+                                    category = ClothingCategory.PANTS;
+                                    break;
+                                case 4:
+                                    category = ClothingCategory.SHOES;
+                                    break;
+                                default:
+                                    throw new IllegalArgumentException(
+                                            "Неправильна категорія");
+                            }
+
+                            item = new Clothes(
+                                    name, size, price, quantity, category);
+
+                        } else if (type == 2) {
+                            System.out.print("Фасон штанів: ");
+                            String fit = scanner.nextLine();
+
+                            item = new Pants(
+                                    name, size, price, quantity, fit);
+
+                        } else {
+                            System.out.print("Тип рукава: ");
+                            String sleeveLength = scanner.nextLine();
+
+                            item = new Shirts(
+                                    name, size, price, quantity, sleeveLength);
                         }
 
-                        Clothes item = new Clothes(
-                                name, size, price, quantity, category);
-
-                        wardrobe.addClothes(item);
+                        clothes.add(item);
                         System.out.println("Об'єкт успішно створено!");
-
-                        Clothes copy = new Clothes(item);
-
-                        System.out.println("Original: " + item);
-                        System.out.println("Copy: " + copy);
-                        System.out.println("Same object: " + (item == copy));
-                        System.out.println("Created objects: "
-                                + Clothes.getObjectCount());
-                        System.out.println("Items in wardrobe: "
-                                + wardrobe.getSize());
+                        System.out.println(item);
 
                     } catch (NumberFormatException e) {
-                        System.out.println("Помилка! Введіть правильне число.");
+                        System.out.println("Помилка! Введіть правильне число");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Помилка! " + e.getMessage());
                     }
                     break;
 
                 case "2":
-                    wardrobe.printClothes();
+                    if (clothes.isEmpty()) {
+                        System.out.println("Список одягу порожній");
+                    } else {
+                        System.out.println("\nСписок одягу:");
+
+                        for (Clothes item : clothes) {
+                            System.out.println("Тип: "
+                                    + item.getClass().getSimpleName());
+                            System.out.println(item.toString());
+                        }
+                    }
                     break;
 
                 case "3":
-                    System.out.println("Роботу завершено.");
+                    System.out.println("Роботу завершено");
                     scanner.close();
                     return;
 
@@ -103,9 +141,3 @@ public class Main {
         }
     }
 }
-
-
-
-
-
-
