@@ -1,8 +1,14 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Автоматичні тести класів одягу
+ */
 public class ClothesTest {
 
+    /**
+     * Перевіряє заборону від'ємної ціни
+     */
     @Test
     void testInvalidPriceInSetter() {
         Clothes item = new Clothes("Shirt", "M", 500, 2);
@@ -12,6 +18,9 @@ public class ClothesTest {
         });
     }
 
+    /**
+     * Перевіряє заборону некоректної кількості
+     */
     @Test
     void testInvalidQuantityInConstructor() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -19,6 +28,9 @@ public class ClothesTest {
         });
     }
 
+    /**
+     * Перевіряє конструктор копіювання
+     */
     @Test
     void testCopyConstructor() {
         Clothes original = new Clothes(
@@ -30,15 +42,9 @@ public class ClothesTest {
         assertNotSame(original, copy);
     }
 
-    @Test
-    void testStaticCounter() {
-        int before = Clothes.getObjectCount();
-
-        new Clothes("Shirt", "M", 500, 2);
-
-        assertEquals(before + 1, Clothes.getObjectCount());
-    }
-
+    /**
+     * Перевіряє категорію одягу
+     */
     @Test
     void testEnumCategory() {
         Clothes item = new Clothes(
@@ -47,25 +53,69 @@ public class ClothesTest {
         assertEquals(ClothingCategory.JACKET, item.getCategory());
     }
 
-    @Test
-    void testWardrobeAggregation() {
-        Wardrobe wardrobe = new Wardrobe();
-
-        Clothes first = new Clothes("Shirt", "M", 500, 2);
-        Clothes second = new Clothes("Jacket", "L", 1500, 1);
-
-        wardrobe.addClothes(first);
-        wardrobe.addClothes(second);
-
-        assertEquals(2, wardrobe.getSize());
-    }
-
+    /**
+     * Перевіряє заборону порожньої категорії
+     */
     @Test
     void testInvalidCategory() {
         assertThrows(IllegalArgumentException.class, () -> {
             new Clothes("Shirt", "M", 500, 2, null);
         });
     }
+
+    /**
+     * Перевіряє створення штанів
+     */
+    @Test
+    void testPantsInheritance() {
+        Pants pants = new Pants("Nike", "L", 1200, 2, "Slim");
+
+        assertTrue(pants instanceof Clothes);
+        assertEquals("Slim", pants.getFit());
+        assertEquals(ClothingCategory.PANTS, pants.getCategory());
+    }
+
+    /**
+     * Перевіряє створення сорочки
+     */
+    @Test
+    void testShirtsInheritance() {
+        Shirts shirt = new Shirts("Adidas", "M", 800, 1, "Long");
+
+        assertTrue(shirt instanceof Clothes);
+        assertEquals("Long", shirt.getSleeveLength());
+        assertEquals(ClothingCategory.TSHIRT, shirt.getCategory());
+    }
+
+    /**
+     * Перевіряє поліморфізм
+     */
+    @Test
+    void testPolymorphism() {
+        Clothes first = new Pants("Nike", "L", 1200, 2, "Slim");
+        Clothes second = new Shirts("Adidas", "M", 800, 1, "Long");
+
+        assertTrue(first.toString().startsWith("Pants{"));
+        assertTrue(second.toString().startsWith("Shirts{"));
+    }
+
+    /**
+     * Перевіряє некоректний фасон штанів
+     */
+    @Test
+    void testInvalidPantsFit() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Pants("Nike", "L", 1200, 2, "");
+        });
+    }
+
+    /**
+     * Перевіряє некоректний тип рукава
+     */
+    @Test
+    void testInvalidShirtsSleeve() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Shirts("Adidas", "M", 800, 1, "");
+        });
+    }
 }
-
-

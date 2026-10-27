@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /**
  * Головний клас програми для роботи з одягом
- * Демонструє створення об'єктів та наслідування
+ * Демонструє наслідування та поліморфізм
  */
 public class Main {
 
@@ -107,10 +107,10 @@ public class Main {
 
                         clothes.add(item);
                         System.out.println("Об'єкт успішно створено!");
-                        System.out.println(item.toString());
+                        System.out.println(item);
 
                     } catch (NumberFormatException e) {
-                        System.out.println("Помилка! Введіть правильне число.");
+                        System.out.println("Помилка! Введіть правильне число");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Помилка! " + e.getMessage());
                     }
@@ -118,18 +118,20 @@ public class Main {
 
                 case "2":
                     if (clothes.isEmpty()) {
-                        System.out.println("Список одягу порожній.");
+                        System.out.println("Список одягу порожній");
                     } else {
                         System.out.println("\nСписок одягу:");
 
                         for (Clothes item : clothes) {
+                            System.out.println("Тип: "
+                                    + item.getClass().getSimpleName());
                             System.out.println(item.toString());
                         }
                     }
                     break;
 
                 case "3":
-                    System.out.println("Роботу завершено.");
+                    System.out.println("Роботу завершено");
                     scanner.close();
                     return;
 
@@ -139,6 +141,3 @@ public class Main {
         }
     }
 }
-
-
-
