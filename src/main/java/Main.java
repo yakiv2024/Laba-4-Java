@@ -30,12 +30,20 @@ public class Main {
                         System.out.println("1. Звичайний одяг");
                         System.out.println("2. Штани");
                         System.out.println("3. Сорочка");
+                        System.out.println("4. Куртка");
+                        System.out.println("5. Взуття");
+                        System.out.println("0. Повернутися до головного меню");
                         System.out.print("Виберіть тип: ");
 
                         int type = Integer.parseInt(
                                 scanner.nextLine().trim());
 
-                        if (type < 1 || type > 3) {
+                        if (type == 0) {
+                            System.out.println("Повернення до головного меню");
+                            break;
+                        }
+
+                        if (type < 1 || type > 5) {
                             throw new IllegalArgumentException(
                                     "Неправильний тип одягу");
                         }
@@ -97,12 +105,32 @@ public class Main {
                             item = new Pants(
                                     name, size, price, quantity, fit);
 
-                        } else {
+                        } else if (type == 3) {
                             System.out.print("Тип рукава: ");
                             String sleeveLength = scanner.nextLine();
 
                             item = new Shirts(
                                     name, size, price, quantity, sleeveLength);
+
+                        } else if (type == 4) {
+                            System.out.print("Сезон: ");
+                            String season = scanner.nextLine();
+
+                            boolean waterproof = readYesNo(
+                                    scanner, "Водонепроникна? (так/ні): ");
+
+                            item = new Jacket(name, size, price,
+                                    quantity, season, waterproof);
+
+                        } else {
+                            System.out.print("Матеріал підошви: ");
+                            String soleMaterial = scanner.nextLine();
+
+                            boolean hasLaces = readYesNo(
+                                    scanner, "Є шнурки? (так/ні): ");
+
+                            item = new Shoes(name, size, price,
+                                    quantity, soleMaterial, hasLaces);
                         }
 
                         clothes.add(item);
@@ -122,10 +150,13 @@ public class Main {
                     } else {
                         System.out.println("\nСписок одягу:");
 
+                        int index = 1;
                         for (Clothes item : clothes) {
-                            System.out.println("Тип: "
+                            System.out.println(index++ + ". Тип: "
                                     + item.getClass().getSimpleName());
-                            System.out.println(item.toString());
+                            // поліморфізм: викликається toString()
+                            // конкретного підкласу
+                            System.out.println("   " + item);
                         }
                     }
                     break;
@@ -139,5 +170,28 @@ public class Main {
                     System.out.println("Помилка. Виберіть пункт від 1 до 3");
             }
         }
+    }
+
+    /**
+     * Зчитує відповідь "так" або "ні"
+     *
+     * @param scanner сканер для введення
+     * @param prompt текст запитання
+     * @return true для "так", false для "ні"
+     * @throws IllegalArgumentException якщо відповідь некоректна
+     */
+    private static boolean readYesNo(Scanner scanner, String prompt) {
+        System.out.print(prompt);
+        String answer = scanner.nextLine().trim().toLowerCase();
+
+        if (answer.equals("так") || answer.equals("y")
+                || answer.equals("yes") || answer.equals("1")) {
+            return true;
+        }
+        if (answer.equals("ні") || answer.equals("n")
+                || answer.equals("no") || answer.equals("0")) {
+            return false;
+        }
+        throw new IllegalArgumentException("Введіть 'так' або 'ні'");
     }
 }
