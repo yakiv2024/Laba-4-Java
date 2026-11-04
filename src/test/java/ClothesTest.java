@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Автоматичні тести класів одягу
  */
@@ -117,5 +120,69 @@ public class ClothesTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Shirts("Adidas", "M", 800, 1, "");
         });
+    }
+
+    /**
+     * Перевіряє створення куртки
+     */
+    @Test
+    void testJacketInheritance() {
+        Jacket jacket = new Jacket("Columbia", "XL", 3500, 1, "Зима", true);
+
+        assertTrue(jacket instanceof Clothes);
+        assertEquals("Зима", jacket.getSeason());
+        assertTrue(jacket.isSuitableForRain());
+        assertEquals(ClothingCategory.JACKET, jacket.getCategory());
+    }
+
+    /**
+     * Перевіряє некоректний сезон куртки
+     */
+    @Test
+    void testInvalidJacketSeason() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Jacket("Columbia", "XL", 3500, 1, " ", false);
+        });
+    }
+
+    /**
+     * Перевіряє створення взуття
+     */
+    @Test
+    void testShoesInheritance() {
+        Shoes shoes = new Shoes("Puma", "42", 2500, 1, "Гума", false);
+
+        assertTrue(shoes instanceof Clothes);
+        assertEquals("Гума", shoes.getSoleMaterial());
+        assertEquals("без шнурків", shoes.getFasteningType());
+        assertEquals(ClothingCategory.SHOES, shoes.getCategory());
+    }
+
+    /**
+     * Перевіряє некоректний матеріал підошви
+     */
+    @Test
+    void testInvalidShoesSole() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Shoes("Puma", "42", 2500, 1, "", true);
+        });
+    }
+
+    /**
+     * Перевіряє поліморфізм усіх п'яти класів в одному ArrayList
+     */
+    @Test
+    void testPolymorphismAllTypes() {
+        List<Clothes> list = new ArrayList<>();
+        list.add(new Clothes("Base", "M", 100, 1));
+        list.add(new Pants("Nike", "L", 1200, 2, "Slim"));
+        list.add(new Shirts("Adidas", "M", 800, 1, "Long"));
+        list.add(new Jacket("Columbia", "XL", 3500, 1, "Зима", true));
+        list.add(new Shoes("Puma", "42", 2500, 1, "Гума", true));
+
+        String[] prefixes = {"Clothes{", "Pants{", "Shirts{", "Jacket{", "Shoes{"};
+        for (int i = 0; i < list.size(); i++) {
+            assertTrue(list.get(i).toString().startsWith(prefixes[i]));
+        }
     }
 }
