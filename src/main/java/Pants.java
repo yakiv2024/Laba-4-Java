@@ -3,7 +3,7 @@
  */
 public class Pants extends Clothes {
     private String fit;
-
+ 
     /**
      * Створює об'єкт штанів
      */
@@ -12,14 +12,14 @@ public class Pants extends Clothes {
         super(name, size, price, quantity, ClothingCategory.PANTS);
         setFit(fit);
     }
-
+ 
     /**
      * Повертає фасон штанів
      */
     public String getFit() {
         return fit;
     }
-
+ 
     /**
      * Встановлює фасон штанів
      */
@@ -29,7 +29,7 @@ public class Pants extends Clothes {
         }
         this.fit = fit;
     }
-
+ 
     /**
      * Повертає інформацію про штани
      */
@@ -41,5 +41,16 @@ public class Pants extends Clothes {
                 ", category=" + getCategory() +
                 ", fit='" + fit + "'}";
     }
+ 
+    /**
+     * Повертає рядок для запису об'єкта у файл
+     *
+     * @return рядок для файлу
+     */
+    @Override
+    public String toFileString() {
+        return getClass().getSimpleName() + ";" + clean(getName()) + ";"
+                + clean(getSize()) + ";" + getPrice() + ";" + getQuantity()
+                + ";" + clean(fit);
+    }
 }
-

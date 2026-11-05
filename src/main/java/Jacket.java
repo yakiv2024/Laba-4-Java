@@ -5,7 +5,7 @@
 public class Jacket extends Clothes {
     private String season;
     private boolean waterproof;
-
+ 
     /**
      * Створює об'єкт куртки
      *
@@ -22,14 +22,14 @@ public class Jacket extends Clothes {
         setSeason(season);
         setWaterproof(waterproof);
     }
-
+ 
     /**
      * Повертає сезон куртки
      */
     public String getSeason() {
         return season;
     }
-
+ 
     /**
      * Встановлює сезон куртки
      *
@@ -41,21 +41,21 @@ public class Jacket extends Clothes {
         }
         this.season = season;
     }
-
+ 
     /**
      * Повертає, чи водонепроникна куртка
      */
     public boolean isWaterproof() {
         return waterproof;
     }
-
+ 
     /**
      * Встановлює водонепроникність куртки
      */
     public void setWaterproof(boolean waterproof) {
         this.waterproof = waterproof;
     }
-
+ 
     /**
      * Перевіряє, чи підходить куртка для дощової погоди
      *
@@ -64,7 +64,7 @@ public class Jacket extends Clothes {
     public boolean isSuitableForRain() {
         return waterproof;
     }
-
+ 
     /**
      * Повертає інформацію про куртку
      */
@@ -77,5 +77,17 @@ public class Jacket extends Clothes {
                 ", category=" + getCategory() +
                 ", season='" + season +
                 "', waterproof=" + waterproof + "}";
+    }
+ 
+    /**
+     * Повертає рядок для запису об'єкта у файл
+     *
+     * @return рядок для файлу
+     */
+    @Override
+    public String toFileString() {
+        return getClass().getSimpleName() + ";" + clean(getName()) + ";"
+                + clean(getSize()) + ";" + getPrice() + ";" + getQuantity()
+                + ";" + clean(season) + ";" + waterproof;
     }
 }

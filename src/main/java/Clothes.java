@@ -1,5 +1,5 @@
 import java.util.Objects;
-
+ 
 /**
  * Клас для опису одягу
  * Містить назву, розмір, ціну, кількість та категорію
@@ -10,7 +10,7 @@ public class Clothes {
     private double price;
     private int quantity;
     private ClothingCategory category;
-
+ 
     /**
      * Створює новий об'єкт одягу
      *
@@ -28,7 +28,7 @@ public class Clothes {
         setQuantity(quantity);
         setCategory(category);
     }
-
+ 
     /**
      * Створює одяг із категорією TSHIRT за замовчуванням
      *
@@ -40,7 +40,7 @@ public class Clothes {
     public Clothes(String name, String size, double price, int quantity) {
         this(name, size, price, quantity, ClothingCategory.TSHIRT);
     }
-
+ 
     /**
      * Створює копію іншого об'єкта одягу
      *
@@ -50,7 +50,7 @@ public class Clothes {
         this(other.getName(), other.getSize(), other.getPrice(),
              other.getQuantity(), other.getCategory());
     }
-
+ 
     /**
      * Повертає назву одягу
      *
@@ -59,7 +59,7 @@ public class Clothes {
     public String getName() {
         return name;
     }
-
+ 
     /**
      * Встановлює назву одягу
      *
@@ -72,7 +72,7 @@ public class Clothes {
         }
         this.name = name;
     }
-
+ 
     /**
      * Повертає розмір одягу
      *
@@ -81,7 +81,7 @@ public class Clothes {
     public String getSize() {
         return size;
     }
-
+ 
     /**
      * Встановлює розмір одягу
      *
@@ -94,7 +94,7 @@ public class Clothes {
         }
         this.size = size;
     }
-
+ 
     /**
      * Повертає ціну одягу
      *
@@ -103,7 +103,7 @@ public class Clothes {
     public double getPrice() {
         return price;
     }
-
+ 
     /**
      * Встановлює ціну одягу
      *
@@ -116,7 +116,7 @@ public class Clothes {
         }
         this.price = price;
     }
-
+ 
     /**
      * Повертає кількість одиниць одягу
      *
@@ -125,7 +125,7 @@ public class Clothes {
     public int getQuantity() {
         return quantity;
     }
-
+ 
     /**
      * Встановлює кількість одиниць одягу
      *
@@ -138,7 +138,7 @@ public class Clothes {
         }
         this.quantity = quantity;
     }
-
+ 
     /**
      * Повертає категорію одягу
      *
@@ -147,7 +147,7 @@ public class Clothes {
     public ClothingCategory getCategory() {
         return category;
     }
-
+ 
     /**
      * Встановлює категорію одягу
      *
@@ -160,7 +160,7 @@ public class Clothes {
         }
         this.category = category;
     }
-
+ 
     /**
      * Повертає текстове представлення об'єкта
      *
@@ -173,7 +173,7 @@ public class Clothes {
                 ", quantity=" + quantity +
                 ", category=" + category + "}";
     }
-
+ 
     /**
      * Порівнює два об'єкти одягу за значеннями полів
      *
@@ -184,17 +184,38 @@ public class Clothes {
         if (this == obj) {
             return true;
         }
-
+ 
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-
+ 
         Clothes other = (Clothes) obj;
-
+ 
         return Double.compare(price, other.price) == 0
                 && quantity == other.quantity
                 && Objects.equals(name, other.name)
                 && Objects.equals(size, other.size)
                 && category == other.category;
+    }
+ 
+    /**
+     * Повертає рядок для запису об'єкта у файл
+     * Формат: Тип;назва;розмір;ціна;кількість;категорія
+     *
+     * @return рядок для файлу
+     */
+    public String toFileString() {
+        return getClass().getSimpleName() + ";" + clean(name) + ";"
+                + clean(size) + ";" + price + ";" + quantity + ";" + category;
+    }
+ 
+    /**
+     * Замінює символ-роздільник ';' на ',' щоб не зламати формат файлу
+     *
+     * @param value текст для перевірки
+     * @return текст без символу ';'
+     */
+    protected static String clean(String value) {
+        return value.replace(';', ',');
     }
 }

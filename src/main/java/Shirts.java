@@ -3,7 +3,7 @@
  */
 public class Shirts extends Clothes {
     private String sleeveLength;
-
+ 
     /**
      * Створює об'єкт сорочки
      */
@@ -12,14 +12,14 @@ public class Shirts extends Clothes {
         super(name, size, price, quantity, ClothingCategory.TSHIRT);
         setSleeveLength(sleeveLength);
     }
-
+ 
     /**
      * Повертає тип рукава
      */
     public String getSleeveLength() {
         return sleeveLength;
     }
-
+ 
     /**
      * Встановлює тип рукава
      */
@@ -29,7 +29,7 @@ public class Shirts extends Clothes {
         }
         this.sleeveLength = sleeveLength;
     }
-
+ 
     /**
      * Повертає інформацію про сорочку
      */
@@ -40,5 +40,17 @@ public class Shirts extends Clothes {
                 ", quantity=" + getQuantity() +
                 ", category=" + getCategory() +
                 ", sleeveLength='" + sleeveLength + "'}";
+    }
+ 
+    /**
+     * Повертає рядок для запису об'єкта у файл
+     *
+     * @return рядок для файлу
+     */
+    @Override
+    public String toFileString() {
+        return getClass().getSimpleName() + ";" + clean(getName()) + ";"
+                + clean(getSize()) + ";" + getPrice() + ";" + getQuantity()
+                + ";" + clean(sleeveLength);
     }
 }

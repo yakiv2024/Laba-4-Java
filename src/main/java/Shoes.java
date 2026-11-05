@@ -5,7 +5,7 @@
 public class Shoes extends Clothes {
     private String soleMaterial;
     private boolean hasLaces;
-
+ 
     /**
      * Створює об'єкт взуття
      *
@@ -22,14 +22,14 @@ public class Shoes extends Clothes {
         setSoleMaterial(soleMaterial);
         setHasLaces(hasLaces);
     }
-
+ 
     /**
      * Повертає матеріал підошви
      */
     public String getSoleMaterial() {
         return soleMaterial;
     }
-
+ 
     /**
      * Встановлює матеріал підошви
      *
@@ -42,21 +42,21 @@ public class Shoes extends Clothes {
         }
         this.soleMaterial = soleMaterial;
     }
-
+ 
     /**
      * Повертає, чи має взуття шнурки
      */
     public boolean hasLaces() {
         return hasLaces;
     }
-
+ 
     /**
      * Встановлює наявність шнурків
      */
     public void setHasLaces(boolean hasLaces) {
         this.hasLaces = hasLaces;
     }
-
+ 
     /**
      * Повертає тип застібки взуття
      *
@@ -65,7 +65,7 @@ public class Shoes extends Clothes {
     public String getFasteningType() {
         return hasLaces ? "шнурки" : "без шнурків";
     }
-
+ 
     /**
      * Повертає інформацію про взуття
      */
@@ -78,5 +78,17 @@ public class Shoes extends Clothes {
                 ", category=" + getCategory() +
                 ", soleMaterial='" + soleMaterial +
                 "', fastening='" + getFasteningType() + "'}";
+    }
+ 
+    /**
+     * Повертає рядок для запису об'єкта у файл
+     *
+     * @return рядок для файлу
+     */
+    @Override
+    public String toFileString() {
+        return getClass().getSimpleName() + ";" + clean(getName()) + ";"
+                + clean(getSize()) + ";" + getPrice() + ";" + getQuantity()
+                + ";" + clean(soleMaterial) + ";" + hasLaces;
     }
 }
